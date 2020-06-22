@@ -25,7 +25,7 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-     "build:providers:externals": "ng build --extra-webpack-config apps/providers/webpack.externals.js --prod --project providers --single-bundle"
+    "build:providers:externals": "ng build --extra-webpack-config apps/providers/webpack.externals.js --prod --project providers --single-bundle"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +52,7 @@
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
+    "logrocket": "^1.0.8",
     "ngx-build-plus": "^9.0.6",
     "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.5.4",

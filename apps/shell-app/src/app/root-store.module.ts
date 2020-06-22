@@ -6,6 +6,8 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RootEffects } from './+state/root.effects';
 import * as fromRoot from './+state/root.reducer';
+import { DebugEffects } from './components/debug/debug.effects';
+import { DebugModule } from './components/debug/debug-module';
 @NgModule({
   imports: [
     StoreModule.forRoot( {app: fromRoot.reducer},
@@ -17,8 +19,8 @@ import * as fromRoot from './+state/root.reducer';
         }
       }
     ),
-    EffectsModule.forRoot([RootEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([RootEffects,DebugEffects]),
+    //environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [RootEffects]

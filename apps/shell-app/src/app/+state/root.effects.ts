@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType, rootEffectsInit } from '@ngrx/effects';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 
 import * as RootActions from './root.actions';
