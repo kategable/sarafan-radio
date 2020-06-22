@@ -41,4 +41,9 @@ export class AppComponent {
   changeRoute(link) {
     this.store.dispatch(changeLink({ link }));
   }
+
+  onDebug(){
+    this.store.dispatch(changeLink({ link:'debug' }));
+
+  }
 }

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootState } from '../../+state/root.selectors'; 
 import { enableDebug } from './debug.actions';
+import { changeLink } from '../../+state/root.actions';
 
 @Component({
   selector: 'saraphan-debug',
   templateUrl: './debug.component.html',
-  styleUrls: ['./debug.component.css']
+  styleUrls: ['./debug.component.scss']
 })
 export class DebugComponent implements OnInit {
 
@@ -16,5 +17,8 @@ export class DebugComponent implements OnInit {
   ngOnInit(): void {
    this.store.dispatch(enableDebug());
   }
+  goHome(){
+    this.store.dispatch(changeLink({ link:'' }));
 
+  }
 }

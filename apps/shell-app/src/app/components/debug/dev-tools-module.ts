@@ -10,7 +10,7 @@ import { StoreDevtoolsModule, StoreDevtools } from '@ngrx/store-devtools';
 })
 export class DevToolsModule {
   constructor(private storeDevtools: StoreDevtools){
-    storeDevtools.refresh();
+   // storeDevtools.refresh();
     console.log("in dev tools module");
   }
 }
