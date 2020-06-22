@@ -19,7 +19,7 @@ import { DebugEffects } from './components/debug/debug.effects';
       }
     ),
     EffectsModule.forRoot([RootEffects,DebugEffects]),
-    //environment.production ? StoreDevtoolsModule.instrument() : [],
+    environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [RootEffects]
