@@ -16,11 +16,7 @@ import { ApiService } from '../../api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  constructor(
-    private store: Store<RootState>,
-    private api: ApiService
-  ) {}
+  constructor(private store: Store<RootState>, private api: ApiService) {}
   title = 'shell';
   responseJson: string;
   user$ = this.store.pipe(select(selectUser));
@@ -41,11 +37,14 @@ export class AppComponent {
   changeRoute(link) {
     this.store.dispatch(changeLink({ link }));
   }
-  onDebug(){
-    this.store.dispatch(changeLink({ link:'debug' }));
+  onDebug() {
+    this.store.dispatch(changeLink({ link: 'debug' }));
+    this.isDebugVisible = false;
   }
   @HostListener('document:keydown', ['$event'])
   keypress(e: KeyboardEvent) {
+    if (e.key === 'F1') {
       this.isDebugVisible = true;
+    }
   }
 }
