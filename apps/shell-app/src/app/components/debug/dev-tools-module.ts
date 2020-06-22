@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';  
+import { StoreDevtoolsModule, StoreDevtools } from '@ngrx/store-devtools';  
 @NgModule({
   imports: [ 
     StoreDevtoolsModule.instrument({  
@@ -9,6 +9,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   ], 
 })
 export class DevToolsModule {
-  constructor(){console.log("in dev tools module");
+  constructor(private storeDevtools: StoreDevtools){console.log("in dev tools module");
   }
 }
