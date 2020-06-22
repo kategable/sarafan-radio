@@ -19,7 +19,7 @@ import { ShellComponent } from './components';
 import { MaterialModule } from './material.module'; 
  // import localeRu from '@angular/common/locales/ru';
 // import { registerLocaleData } from '@angular/common';
-// registerLocaleData(localeRu, 'ru');
+// registerLocaleData(localeRu, 'ru'); 
 
 const appRoutes: Routes = [
   {
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
   {
     path: 'debug',
     loadChildren: () =>
-    import('./debug/debug-module').then(
+    import('./debug/debug.module').then(
       m => m.DebugModule
     )
       

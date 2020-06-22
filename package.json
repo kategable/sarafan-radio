@@ -53,6 +53,7 @@
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "logrocket": "^1.0.8",
+    "logrocket-ngrx": "^0.1.1",
     "ngx-build-plus": "^9.0.6",
     "ngx-material-timepicker": "^5.5.1",
     "rxjs": "~6.5.4",
