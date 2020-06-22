@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RootState } from '../../+state/root.selectors';
+import { RootState } from '../+state/root.selectors';
 import { enableDebug } from './debug.actions';
-import { changeLink } from '../../+state/root.actions';
+import { changeLink } from '../+state/root.actions';
 
 @Component({
   templateUrl: './debug.component.html',

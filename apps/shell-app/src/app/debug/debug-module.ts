@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 
 import { DebugComponent } from './debug.component';
 import { RouterModule } from '@angular/router';
 @NgModule({
@@ -11,6 +10,6 @@ import { RouterModule } from '@angular/router';
 
 })
 export class DebugModule {
-  constructor(){console.log("in debug");
-  }
+  constructor(){}
+  
 }

@@ -4,8 +4,8 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import * as DebugActions from './debug.actions';
 import { switchMap } from 'rxjs/operators';
 import { DevToolsModule, LOGROCKET_INIT_KEY } from './dev-tools-module';
-import * as LogRocket from 'logrocket';
-import { changeLink } from '../../+state/root.actions';
+import * as LogRocket from 'logrocket'; 
+import { changeLink } from '../+state/root.actions';
 
 @Injectable()
 export class DebugEffects {
