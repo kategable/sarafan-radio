@@ -12,7 +12,6 @@
 
 
 
-
-<button (click)="onDebug()"mat-icon-button aria-label="debug">
+<button *ngIf="isDebugVisible" (click)="onDebug()"mat-icon-button aria-label="debug">
   <mat-icon>bug_report</mat-icon>
 </button>
