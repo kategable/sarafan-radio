@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as DebugActions from './debug.actions';
 import { switchMap } from 'rxjs/operators'; 
-import { DevToolsModule } from './dev-tools-module';
+import { DevToolsModule, LOGROCKET_INIT_KEY } from './dev-tools-module';
 import * as LogRocket from 'logrocket'; 
 
 @Injectable()
@@ -19,10 +19,9 @@ export class DebugEffects {
       this.actions$.pipe(
         ofType(DebugActions.enableDebug),
         switchMap(async () => { 
-        //  const m = this.compiler.compileModuleSync<DevToolsModule>(DevToolsModule);
-       //   m.create(this.injector);
-          
-          LogRocket.init('6riuqy/test-rad');
+         const m = this.compiler.compileModuleSync<DevToolsModule>(DevToolsModule);
+         m.create(this.injector);
+          LogRocket.init(LOGROCKET_INIT_KEY);
         })
       ),
     { dispatch: false }

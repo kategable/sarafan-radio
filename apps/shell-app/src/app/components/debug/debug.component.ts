@@ -14,7 +14,7 @@ export class DebugComponent implements OnInit {
     constructor(private readonly store: Store<RootState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(enableDebug());
+   this.store.dispatch(enableDebug());
   }
 
 }
