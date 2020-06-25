@@ -7,7 +7,7 @@ import {
   LogoutAction,
   changeLink
 } from '../../+state/root.actions';
-import { selectUser, RootState } from '../../+state/root.selectors';
+import { selectUser, RootState, selectLoading } from '../../+state/root.selectors';
 import { ApiService } from '../../api.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent {
   title = 'shell';
   responseJson: string;
   user$ = this.store.pipe(select(selectUser));
+  loading$ = this.store.pipe(select(selectLoading));
   showShell = true;
   isDebugVisible = false;
   login() {

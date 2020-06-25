@@ -9,7 +9,7 @@
     <router-outlet></router-outlet>
   </main>
 </mat-sidenav-container>
-
+<div *ngIf="loading$ | async">loading...</div>
 
 
 <button *ngIf="isDebugVisible" (click)="onDebug()"mat-icon-button aria-label="debug">

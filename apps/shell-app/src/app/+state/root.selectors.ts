@@ -14,3 +14,6 @@ export const selectUser = (state: RootState) => {
 export const isAuthenticated = (state: RootState) => {
   return state.app.user?.loggedIn;
 };
+export const selectLoading = (state: RootState) => {
+  return !state.app.loaded;
+};
