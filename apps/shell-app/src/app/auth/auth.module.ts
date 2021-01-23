@@ -15,7 +15,7 @@ export interface IEnvironment {
 })
 export class AuthModule {
 
-  public static forRoot(environment: IEnvironment): ModuleWithProviders {
+  public static forRoot(environment: IEnvironment): ModuleWithProviders<AuthModule> {
 
       return {
           ngModule: AuthModule,
