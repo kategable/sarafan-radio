@@ -67,7 +67,7 @@ const appRoutes: Routes = [
     UiModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabled' }),
+    RouterModule.forRoot(appRoutes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
     HttpClientModule,
     RootStoreModule,
     AuthModule.forRoot(environment)

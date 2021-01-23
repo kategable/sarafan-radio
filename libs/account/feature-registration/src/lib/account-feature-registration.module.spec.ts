@@ -1,8 +1,8 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AccountFeatureRegistrationModule } from './account-feature-registration.module';
 
 describe('AccountFeatureRegistrationModule', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [AccountFeatureRegistrationModule]
     }).compileComponents();
