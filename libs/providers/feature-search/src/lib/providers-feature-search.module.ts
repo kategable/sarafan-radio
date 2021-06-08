@@ -5,6 +5,9 @@ import { ProvidersSearchComponent } from './search.component';
 import { ProvidersRoutingModule } from './providers-routing.module';
 
 @NgModule({
+  declarations:[
+    ProvidersSearchComponent
+  ],
   imports: [
     CommonModule,
     ProvidersDomainModule, 

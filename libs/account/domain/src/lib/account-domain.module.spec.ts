@@ -1,8 +1,8 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AccountDomainModule } from './account-domain.module';
 
 describe('AccountDomainModule', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [AccountDomainModule]
     }).compileComponents();
