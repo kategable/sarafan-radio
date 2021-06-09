@@ -8,7 +8,7 @@ A customer will be able to schedule an appointment using site or a bot
 
 ## Deploy to github page
 
-ng build --configuration production --base-href "https://katesky.github.io/saraphan-radio/"
+ng build --configuration production --base-href "https://katesky.github.io/sarafan-radio/"
 ngh --message="github deploy"
 
 ### More tha 10 lines of code
