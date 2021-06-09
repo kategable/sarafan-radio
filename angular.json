@@ -10,7 +10,7 @@
       },
       "root": "apps/shell-app",
       "sourceRoot": "apps/shell-app/src",
-      "prefix": "saraphan",
+      "prefix": "sarafan",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -199,7 +199,7 @@
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",
-      "prefix": "saraphan",
+      "prefix": "sarafan",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

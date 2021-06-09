@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy} from '@angular/core';
-import { ProvidersFacade } from '@saraphan/providers/domain';
+import { ProvidersFacade } from '@sarafan/providers/domain';
 
 
 @Component({

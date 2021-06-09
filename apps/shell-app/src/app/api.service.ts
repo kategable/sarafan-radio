@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-//https://saraphanradio.azurewebsites.net
+//https://sarafanradio.azurewebsites.net
 
   ping$(): Observable<any> {
     return this.http.get('https://localhost:44387/api/values');

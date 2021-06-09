@@ -5,7 +5,7 @@ import { RootState, selectUser } from '../../+state/root.selectors';
 import { changeLink, LoginAction } from '../../+state/root.actions';
 
 @Component({
-  selector: 'saraphan-shell',
+  selector: 'sarafan-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })

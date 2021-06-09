@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProvidersDomainModule } from '@saraphan/providers/domain';
+import { ProvidersDomainModule } from '@sarafan/providers/domain';
 import { ProvidersSearchComponent } from './search.component';
 import { ProvidersRoutingModule } from './providers-routing.module';
 
@@ -10,7 +10,7 @@ import { ProvidersRoutingModule } from './providers-routing.module';
   ],
   imports: [
     CommonModule,
-    ProvidersDomainModule, 
+    ProvidersDomainModule,
     ProvidersRoutingModule
   ],
 

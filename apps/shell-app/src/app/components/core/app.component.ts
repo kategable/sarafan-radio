@@ -11,7 +11,7 @@ import { selectUser, RootState, selectLoading } from '../../+state/root.selector
 import { ApiService } from '../../api.service';
 
 @Component({
-  selector: 'saraphan-root',
+  selector: 'sarafan-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

@@ -1,5 +1,5 @@
 {
-  "npmScope": "saraphan",
+  "npmScope": "sarafan",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {

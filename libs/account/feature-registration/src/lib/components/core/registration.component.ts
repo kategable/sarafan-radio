@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationFacade } from '@saraphan/account/domain';
+import { RegistrationFacade } from '@sarafan/account/domain';
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective,NgForm } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {ErrorStateMatcher} from '@angular/material/core';

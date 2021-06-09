@@ -1,5 +1,5 @@
 {
-  "name": "saraphan",
+  "name": "sarafan",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -26,8 +26,8 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "build:providers:externals": "ng build --extra-webpack-config apps/providers/webpack.externals.js --prod --project providers --single-bundle",
-    "deploy": "ng deploy --base-href='https://katesky.github.io/saraphan-radio/' --repo='https://github.com/katesky/saraphan-radio.git' --no-silent",
-    "deploy:no-build": "ng deploy --base-href='https://katesky.github.io/saraphan-radio/' --repo='https://github.com/katesky/saraphan-radio.git' --no-silent --no-build"
+    "deploy": "ng deploy --base-href='https://katesky.github.io/sarafan-radio/' --repo='https://github.com/katesky/sarafan-radio.git' --no-silent",
+    "deploy:no-build": "ng deploy --base-href='https://katesky.github.io/sarafan-radio/' --repo='https://github.com/katesky/sarafan-radio.git' --no-silent --no-build"
   },
   "private": true,
   "dependencies": {

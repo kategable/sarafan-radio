@@ -5,7 +5,7 @@ import { enableDebug } from './debug.actions';
 
 @Component({
   template: ``,
-  selector: 'saraphan-debug'
+  selector: 'sarafan-debug'
 })
 export class DebugComponent implements OnInit {
   constructor(private readonly store: Store<RootState>) {}

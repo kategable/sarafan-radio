@@ -5,7 +5,7 @@ import { AppComponent } from './components/core/app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { UiModule ,BetaComponent } from '@saraphan/ui';
+import { UiModule ,BetaComponent } from '@sarafan/ui';
 import { RootStoreModule } from './root-store.module';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
@@ -16,10 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './components';
-import { MaterialModule } from './material.module'; 
+import { MaterialModule } from './material.module';
  // import localeRu from '@angular/common/locales/ru';
 // import { registerLocaleData } from '@angular/common';
-// registerLocaleData(localeRu, 'ru'); 
+// registerLocaleData(localeRu, 'ru');
 
 const appRoutes: Routes = [
   {
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   {
     path: 'search',
     loadChildren: () =>
-      import('@saraphan/providers/feature-search').then(
+      import('@sarafan/providers/feature-search').then(
         m => m.ProvidersFeatureSearchModule
       )
   },
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
    {
     path:'account',
     loadChildren: () =>
-    import('@saraphan/account/feature-registration').then(m => m.AccountFeatureRegistrationModule)
+    import('@sarafan/account/feature-registration').then(m => m.AccountFeatureRegistrationModule)
    // canActivate: [AuthGuard]
   },
   {
@@ -53,9 +53,9 @@ const appRoutes: Routes = [
     import('./debug/debug.module').then(
       m => m.DebugModule
     )
-      
+
   },
-  
+
 ];
 
 @NgModule({

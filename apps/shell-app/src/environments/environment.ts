@@ -9,7 +9,7 @@ export const environment = {
   authDomain:'csa-app.auth0.com',
   path: 'http://localhost:4200',
   callback: 'http://localhost:4200/callback',
-  api:'http://saraphanradio.com/api'
+  api:'http://sarafanradio.com/api'
 }
 
 /*

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccountDomainModule } from '@saraphan/account/domain';
-import {UiModule,MaterialModule } from '@saraphan/ui';
+import { AccountDomainModule } from '@sarafan/account/domain';
+import {UiModule,MaterialModule } from '@sarafan/ui';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
