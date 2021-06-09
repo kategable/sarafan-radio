@@ -94,6 +94,10 @@
             "passWithNoTests": true,
             "setupFile": "apps/shell-app/src/test-setup.ts"
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     },
