@@ -1,6 +1,6 @@
 <div class="container-fluid h-100">
   <div class="row h-100 align-items-center justify-content-center">
-    <div class="col-12 align-items-center px-4 pb-3">
+    <div class="d-flex align-items-center px-4 pb-3">
       <mat-card
         (click)="navigate('search')"
         color="primary"
@@ -9,13 +9,13 @@
       >
         <mat-card-title> Shopping for service </mat-card-title>
         <img
-          class="large"
+          class="img-fluid"
           src="./assets/unDraw/undraw_online_collaboration_7pfp.svg"
           alt="client"
         />
       </mat-card>
     </div>
-    <div class="col-12 align-items-center px-4 pb-3 ">
+    <div class="d-flex align-items-center px-4 pb-3 ">
       <ng-container *ngIf="(user$ | async)?.loggedIn; then user; else noUser">
       </ng-container>
       <ng-template #user>
@@ -27,7 +27,7 @@
         >
           <mat-card-title> Go to My account </mat-card-title>
           <img
-            class="large"
+            class="img-fluid"
             src="./assets/unDraw/undraw_online_connection_6778.svg"
             alt="service provider picture to an account link"
           />
@@ -37,7 +37,7 @@
         <mat-card (click)="login()" color="primary" matTooltip="click to login">
           <mat-card-title> Login </mat-card-title>
           <img
-            class="large"
+            class="img-fluid"
             src="./assets/unDraw/login.svg"
             alt="service provider"
           />
