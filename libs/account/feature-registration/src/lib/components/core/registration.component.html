@@ -154,7 +154,7 @@
         <div class="row">
 
           <section class="week-section col-2">
-            <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
+            <mat-checkbox class="example-margin"   [indeterminate]="someComplete()"
               (change)="setAll($event.checked)">
               {{weekend.name}}
             </mat-checkbox>
@@ -192,7 +192,7 @@
       <div>
         <button mat-raised-button matStepperPrevious>Back</button>
         <button mat-raised-button (click)="stepper.reset(); isPitching = false;">Reset</button>
-        <button mat-raised-button color="primary" [disabled]="!mainFormGroup.valid">Submit</button>
+        <button (click)='submit()' mat-raised-button color="primary" [disabled]="!mainFormGroup.valid">Submit</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

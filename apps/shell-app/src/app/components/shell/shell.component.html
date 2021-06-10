@@ -1,6 +1,6 @@
 <div class="container-fluid h-100">
   <div class="row h-100 align-items-center justify-content-center">
-    <div class="d-flex align-items-center px-4 pb-3">
+    <div class="col align-items-center px-4 pb-3">
       <mat-card
         (click)="navigate('search')"
         color="primary"
@@ -15,7 +15,7 @@
         />
       </mat-card>
     </div>
-    <div class="d-flex align-items-center px-4 pb-3 ">
+    <div class="col align-items-center px-4 pb-3 ">
       <ng-container *ngIf="(user$ | async)?.loggedIn; then user; else noUser">
       </ng-container>
       <ng-template #user>
@@ -43,6 +43,22 @@
           />
         </mat-card>
       </ng-template>
+
+    </div>
+    <div class="col align-items-center px-4 pb-3 ">
+      <mat-card
+      aria-describedby="Click here if you are a service provider and would like to set up your account"
+      (click)="navigate('account')"
+      color="primary"
+      matTooltip="click to see your account"
+    >
+      <mat-card-title> Go to My account </mat-card-title>
+      <img
+        class="img-fluid"
+        src="./assets/unDraw/undraw_online_connection_6778.svg"
+        alt="service provider picture to an account link"
+      />
+    </mat-card>
     </div>
   </div>
 </div>
