@@ -110,10 +110,10 @@ export class RegistrationComponent implements OnInit {
     this.week.subtasks.forEach(t => (t.completed = completed));
   }
   todo = [
-    { name: 'Jewelry designer', image: '/assets/unDraw/jewelry_designer.svg' },
-    { name: 'Salon services', image: '/assets/unDraw/barber.svg' },
-    { name: 'Photographer', image: '/assets/unDraw/photo.svg' },
-    { name: 'Realtor', image: '/assets/unDraw/Realtor.svg' }
+    { name: 'Jewelry designer', image: './assets/unDraw/jewelry_designer.svg' },
+    { name: 'Salon services', image: './assets/unDraw/barber.svg' },
+    { name: 'Photographer', image: './assets/unDraw/photo.svg' },
+    { name: 'Realtor', image: './assets/unDraw/Realtor.svg' }
   ];
 
   done = [];
