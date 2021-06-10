@@ -28,7 +28,7 @@
   </div>
   <div class="spacer"></div>
 
-  <div *ngIf="user?.loggedIn"  >
+  <div class="header" *ngIf="user?.loggedIn"  >
     Welcome, {{user.nickname}}!
     <img class="avatar" src="{{user.picture}}">
     <button mat-icon-button (click)=" logout()">

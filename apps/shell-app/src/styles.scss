@@ -2,8 +2,15 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~bootstrap/dist/css/bootstrap.css';
 html, body {
-  margin: 0;  
+  margin: 0;
+
 }
 
 
 
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config(
+  $font-family:  '"Arial", sans-serif;'
+);
+
+@include angular-material-typography($custom-typography);
