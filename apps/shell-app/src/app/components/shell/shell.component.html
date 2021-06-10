@@ -5,6 +5,7 @@
         (click)="navigate('search')"
         color="primary"
         matTooltip="click to search"
+        aria-describedby="Click to search for services"
       >
         <mat-card-title> Shopping for service </mat-card-title>
         <img
@@ -14,12 +15,12 @@
         />
       </mat-card>
     </div>
-    <div class="d-flex align-items-center px-4 pb-3">
+    <div class="d-flex align-items-center px-4 pb-3 ">
       <ng-container *ngIf="(user$ | async)?.loggedIn; then user; else noUser">
       </ng-container>
       <ng-template #user>
         <mat-card
-          aria-roledescription="Click here if you are a service provider and would like to set up your account"
+          aria-describedby="Click here if you are a service provider and would like to set up your account"
           (click)="navigate('account')"
           color="primary"
           matTooltip="click to see your account"
