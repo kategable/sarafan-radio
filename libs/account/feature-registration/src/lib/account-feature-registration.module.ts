@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromAccount from './+state/account.reducer';
 import { AccountEffects } from './+state/account.effects';
+import { SetupAccountComponent } from './setup-account/setup-account.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { AccountEffects } from './+state/account.effects';
     ),
     EffectsModule.forFeature([AccountEffects]),
   ],
-  declarations: [RegistrationComponent],
+  declarations: [RegistrationComponent, SetupAccountComponent],
   exports: [RegistrationComponent],
 })
 export class AccountFeatureRegistrationModule {}
