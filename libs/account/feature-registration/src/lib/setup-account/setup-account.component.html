@@ -57,7 +57,6 @@
               class="example-list" (cdkDropListDropped)="drop($event)">
               <div matTooltip="click and drag" class="example-box" *ngFor="let item of todo" cdkDrag>
                 {{item.name}}
-                <img class="small" [src]="item.image" [alt]="item.name">
                 <img class="mid" *cdkDragPreview [src]="item.image" [alt]="item.name">
               </div>
             </div>
@@ -65,11 +64,11 @@
 
           <div class="example-container col-4">
             <h2>My Services</h2>
-            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+             <div formArrayName="serviceCtrl" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
               class="example-list" (cdkDropListDropped)="drop($event)">
-              <div class="example-box" *ngFor="let item of done" cdkDrag>
+              <div [formGroupName]="i" class="example-box" *ngFor="let item of done" cdkDrag>
                 {{item.name}}
-                <img class="small" src="{{item.image}}">
+                <img class="small" [src]="item.image">
                 <img class="mid" *cdkDragPreview [src]="item.image" [alt]="item.name">
 
               </div>

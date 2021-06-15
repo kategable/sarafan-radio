@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Store } from '@ngrx/store';
 
@@ -40,7 +40,13 @@ export class SetupAccountComponent implements OnInit {
   secondFormGroup: FormGroup = this._formBuilder.group({
     addressCtrl: ['', Validators.required],
     descCtrl: ['', Validators.required],
+    serviceCtrl: this._formBuilder.array([])
+
   });
+  get todoItemControls(): FormArray {
+    return this.secondFormGroup.get("serviceCtrl") as FormArray;
+  }
+
   thirdFormGroup: FormGroup = this._formBuilder.group({
     scheduleCtrl: [''],
   });
@@ -65,21 +71,34 @@ export class SetupAccountComponent implements OnInit {
     ],
   };
   allComplete: boolean = false;
+  todo = [
+    { name: 'Woman Haircut', image: './assets/unDraw/jewelry_designer.svg' },
+    { name: 'Kids Haircut', image: './assets/unDraw/jewelry_designer.svg' },
+    { name: 'Nails', image: './assets/unDraw/barber.svg' },
+    { name: 'Facial', image: './assets/unDraw/barber.svg' },
+    { name: 'Man Haircut', image: './assets/unDraw/barber.svg' },
+    { name: 'Photographer', image: './assets/unDraw/photo.svg' },
+    { name: 'Realtor', image: './assets/unDraw/Realtor.svg' },
+  ];
 
 
   constructor(private store: Store,
     private _formBuilder: FormBuilder,) { }
 
     ngOnInit() {
-      this.load();
       this.mainFormGroup = this._formBuilder.group({
         firstFormGroup: this.firstFormGroup,
         secondFormGroup: this.secondFormGroup,
         thirdFormGroup: this.thirdFormGroup,
       });
+      this.load();
+
     }
 
-    load(): void {}
+    load(): void {
+      let data: any = JSON.parse(localStorage.getItem('formdata'));
+      if(data)  this.mainFormGroup.patchValue(data);
+    }
     updateAllComplete() {
       this.allComplete =
         this.week.subtasks != null &&
@@ -103,16 +122,11 @@ export class SetupAccountComponent implements OnInit {
       }
       this.week.subtasks.forEach((t) => (t.completed = completed));
     }
-    todo = [
-      { name: 'Jewelry designer', image: './assets/unDraw/jewelry_designer.svg' },
-      { name: 'Salon services', image: './assets/unDraw/barber.svg' },
-      { name: 'Photographer', image: './assets/unDraw/photo.svg' },
-      { name: 'Realtor', image: './assets/unDraw/Realtor.svg' },
-    ];
 
     done = [];
     submit() {
-      console.log('mainFormGroup', this.mainFormGroup);
+
+      localStorage.setItem('formdata', JSON.stringify(this.mainFormGroup.value));
       this.store.dispatch(
         AccountActions.create({ account: { name: "test", id: null } })
       );
