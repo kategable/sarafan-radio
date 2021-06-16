@@ -1,10 +1,13 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Store } from '@ngrx/store';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 import * as AccountActions from './../+state/account.actions';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -25,6 +28,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./setup-account.component.scss']
 })
 export class SetupAccountComponent implements OnInit {
+  @ViewChild('serviceInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
   matcher = new MyErrorStateMatcher();
   mainFormGroup: FormGroup;
   emailFormControl = new FormControl('', [
@@ -40,11 +46,11 @@ export class SetupAccountComponent implements OnInit {
   secondFormGroup: FormGroup = this._formBuilder.group({
     addressCtrl: ['', Validators.required],
     descCtrl: ['', Validators.required],
-    serviceCtrl: this._formBuilder.array([])
-
+    serviceCtrl: ['']
   });
-  get todoItemControls(): FormArray {
-    return this.secondFormGroup.get("serviceCtrl") as FormArray;
+
+  get serviceCtrl(): FormControl {
+    return this.secondFormGroup.get("serviceCtrl") as FormControl;
   }
 
   thirdFormGroup: FormGroup = this._formBuilder.group({
@@ -71,7 +77,8 @@ export class SetupAccountComponent implements OnInit {
     ],
   };
   allComplete: boolean = false;
-  todo = [
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  todos = [
     { name: 'Woman Haircut', image: './assets/unDraw/jewelry_designer.svg' },
     { name: 'Kids Haircut', image: './assets/unDraw/jewelry_designer.svg' },
     { name: 'Nails', image: './assets/unDraw/barber.svg' },
@@ -125,6 +132,7 @@ export class SetupAccountComponent implements OnInit {
 
     done = [];
     submit() {
+      console.log("asdasd");
 
       localStorage.setItem('formdata', JSON.stringify(this.mainFormGroup.value));
       this.store.dispatch(
@@ -147,5 +155,38 @@ export class SetupAccountComponent implements OnInit {
         );
       }
     }
+    add(event: MatChipInputEvent): void {
+      const value = (event.value || '').trim();
 
+      // Add our fruit
+      if (value) {
+        this.todos.push({name:value, image:''});
+      }
+
+      // Clear the input value
+      event.chipInput!.clear();
+
+      this.serviceCtrl.setValue(null);
+    }
+
+    remove(value: string): void {
+      const index = this.todos.indexOf({name : value, image: ''});
+
+      if (index >= 0) {
+        this.todos.splice(index, 1);
+      }
+    }
+
+    selected(event: MatAutocompleteSelectedEvent): void {
+      this.todos.push({name: event.option.viewValue, image: ''});
+      this.fruitInput.nativeElement.value = '';
+      this.serviceCtrl.setValue(null);
+    }
+
+   // private _filter(value: string): string[] {
+    //  const filterValue = value.toLowerCase();
+
+     // return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+
+   // }
 }

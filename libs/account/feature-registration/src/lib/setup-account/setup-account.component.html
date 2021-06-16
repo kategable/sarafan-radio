@@ -50,30 +50,35 @@
           </mat-form-field>
         </div>
         <div class="row">
-          <div class="example-container col-4">
-            <h2>Services</h2>
 
-            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-              class="example-list" (cdkDropListDropped)="drop($event)">
-              <div matTooltip="click and drag" class="example-box" *ngFor="let item of todo" cdkDrag>
-                {{item.name}}
-                <img class="mid" *cdkDragPreview [src]="item.image" [alt]="item.name">
-              </div>
-            </div>
-          </div>
 
-          <div class="example-container col-4">
-            <h2>My Services</h2>
-             <div formArrayName="serviceCtrl" cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-              class="example-list" (cdkDropListDropped)="drop($event)">
-              <div [formGroupName]="i" class="example-box" *ngFor="let item of done" cdkDrag>
-                {{item.name}}
-                <img class="small" [src]="item.image">
-                <img class="mid" *cdkDragPreview [src]="item.image" [alt]="item.name">
+          <mat-form-field class="example-chip-list">
+            <mat-label>Service</mat-label>
+            <mat-chip-list #chipList aria-label="service selection">
+              <mat-chip
+                *ngFor="let todo of todos"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(todo)">
+                {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="your service..."
+                #serviceInput
+                [formControl]="serviceCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let todo of todos | async" [value]="todo.name">
+                {{fruit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
 
-              </div>
-            </div>
-          </div>
         </div>
         <div>
           <button mat-raised-button matStepperPrevious>Back</button>
