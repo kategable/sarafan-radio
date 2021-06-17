@@ -8,6 +8,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import * as AccountActions from './../+state/account.actions';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { of } from 'rxjs';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -131,6 +132,8 @@ export class SetupAccountComponent implements OnInit {
     }
 
     done = [];
+    todos$ = of(this.todos);
+
     submit() {
       console.log("asdasd");
 
@@ -170,7 +173,8 @@ export class SetupAccountComponent implements OnInit {
     }
 
     remove(value: string): void {
-      const index = this.todos.indexOf({name : value, image: ''});
+      const index = this.todos.findIndex(t=>t.name === value);
+      console.log(index);
 
       if (index >= 0) {
         this.todos.splice(index, 1);
