@@ -1,11 +1,11 @@
 <form [formGroup]="mainFormGroup" >
   <h2> Setup your service provider account</h2>
   <mat-vertical-stepper [linear]="false" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step  [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your info</ng-template>
+        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your info</span></ng-template>
         <mat-form-field>
-          <mat-label>First Name</mat-label>
+          <mat-label>First Name {{ firstFormGroup.valid}}</mat-label>
           <input matInput placeholder="First name" formControlName="firstCtrl" required>
         </mat-form-field>
         <mat-form-field>
@@ -34,8 +34,7 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-
-        <ng-template matStepLabel>Fill out your service</ng-template>
+        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your service</span></ng-template>
         <div class="row">
           <mat-form-field class="col-8">
             <mat-label>Service Address</mat-label>
@@ -56,11 +55,11 @@
             <mat-label>Service</mat-label>
             <mat-chip-list #chipList aria-label="service selection">
               <mat-chip
-                *ngFor="let todo of todos"
+                *ngFor="let item of services"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(todo)">
-                {{todo.name}}
+                (removed)="remove(item)">
+                {{item.name}}
                 <mat-icon matChipRemove >cancel</mat-icon>
               </mat-chip>
               <input
@@ -74,7 +73,7 @@
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
               <mat-option *ngFor="let todo of todos$ | async" [value]="todo.name">
-                {{fruit}}
+                {{todo.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -88,8 +87,7 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Fill out your schedule</ng-template>
-
+        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your schedule</span></ng-template>
         <div class="row">
           <section class="week-section col-2">
             <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"

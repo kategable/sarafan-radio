@@ -29,7 +29,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./setup-account.component.scss']
 })
 export class SetupAccountComponent implements OnInit {
-  @ViewChild('serviceInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('serviceInput') serviceInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   matcher = new MyErrorStateMatcher();
@@ -89,7 +89,7 @@ export class SetupAccountComponent implements OnInit {
     { name: 'Realtor', image: './assets/unDraw/Realtor.svg' },
   ];
 
-
+  services=[]
   constructor(private store: Store,
     private _formBuilder: FormBuilder,) { }
 
@@ -104,8 +104,12 @@ export class SetupAccountComponent implements OnInit {
     }
 
     load(): void {
+
       let data: any = JSON.parse(localStorage.getItem('formdata'));
-      if(data)  this.mainFormGroup.patchValue(data);
+      if(data)  {
+        this.mainFormGroup.patchValue(data.form);
+        this.services = data.services || [];
+      }
     }
     updateAllComplete() {
       this.allComplete =
@@ -135,29 +139,17 @@ export class SetupAccountComponent implements OnInit {
     todos$ = of(this.todos);
 
     submit() {
-      console.log("asdasd");
+      let storage = {
+        form: this.mainFormGroup.value,
+        services: this.services
+      };
 
-      localStorage.setItem('formdata', JSON.stringify(this.mainFormGroup.value));
+      localStorage.setItem('formdata',JSON.stringify( storage) );
       this.store.dispatch(
         AccountActions.create({ account: { name: "test", id: null } })
       );
     }
-    drop(event: CdkDragDrop<string[]>) {
-      if (event.previousContainer === event.container) {
-        moveItemInArray(
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
-      } else {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
-      }
-    }
+
     add(event: MatChipInputEvent): void {
       const value = (event.value || '').trim();
 
@@ -174,7 +166,7 @@ export class SetupAccountComponent implements OnInit {
 
     remove(value: string): void {
       const index = this.todos.findIndex(t=>t.name === value);
-      console.log(index);
+      console.log('chip remove',index);
 
       if (index >= 0) {
         this.todos.splice(index, 1);
@@ -182,8 +174,8 @@ export class SetupAccountComponent implements OnInit {
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
-      this.todos.push({name: event.option.viewValue, image: ''});
-      this.fruitInput.nativeElement.value = '';
+      this.services.push({name: event.option.viewValue, image: ''});
+      this.serviceInput.nativeElement.value = '';
       this.serviceCtrl.setValue(null);
     }
 
