@@ -17,10 +17,15 @@
     "baseUrl": ".",
     "paths": {
       "@sarafan/providers/domain": ["libs/providers/domain/src/index.ts"],
-      "@sarafan/providers/feature-search": ["libs/providers/feature-search/src/index.ts" ],
+      "@sarafan/providers/feature-search": [
+        "libs/providers/feature-search/src/index.ts"
+      ],
       "@sarafan/ui": ["libs/ui/src/index.ts"],
       "@sarafan/account/domain": ["libs/account/domain/src/index.ts"],
-      "@sarafan/account/feature-registration": [ "libs/account/feature-registration/src/index.ts"  ]
+      "@sarafan/account/feature-registration": [
+        "libs/account/feature-registration/src/index.ts"
+      ],
+      "@sarafan/shared-util": ["libs/shared-util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,5 +1,4 @@
 {
-  "npmScope": "sarafan",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": {
@@ -10,6 +9,7 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
+  "npmScope": "sarafan",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
@@ -33,13 +33,21 @@
       "tags": ["domain:providers", "type:feature"]
     },
     "ui": {
-      "tags": ["domain:account","shell-app","domain:providers","domain:shared"]
+      "tags": [
+        "domain:account",
+        "shell-app",
+        "domain:providers",
+        "domain:shared"
+      ]
     },
     "account-domain": {
       "tags": ["domain:account", "type:domain-logic"]
     },
     "account-feature-registration": {
       "tags": ["domain:account", "type:feature"]
+    },
+    "shared-util": {
+      "tags": []
     }
   }
 }
