@@ -72,8 +72,8 @@
                 (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option *ngFor="let todo of todos$ | async" [value]="todo.name">
-                {{todo.name}}
+              <mat-option *ngFor="let set of presets$ | async" [value]="set.name">
+                {{set.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>

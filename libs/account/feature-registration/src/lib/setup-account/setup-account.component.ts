@@ -1,3 +1,8 @@
+import { serviceData } from './../../../../../shared-util/src/lib/types/service-data';
+import { weekData } from './../../../../../shared-util/src/lib/types/weekdays-data';
+import { Week } from './../../../../../shared-util/src/lib/types/weekdays-type';
+
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -73,73 +78,12 @@ export class SetupAccountComponent implements OnInit {
     scheduleCtrl: [''],
   });
 
-  week = {
-    days: [
-    {
-      name: 'Monday',
-      completed: false,
-      color: 'primary',
-      startTime: '9:00 AM',
-      endTime: ''
-    },
-    {
-      name: 'Tuesday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: '',
-    },
-    {
-      name: 'Wednesday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: '',
-    },
-    {
-      name: 'Thursday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: ''
-    },
-    {
-      name: 'Friday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: ''
-    },
-    {
-      name: 'Saturday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: ''
-    },
-    {
-      name: 'Sunday',
-      completed: false,
-      color: 'primary',
-      startTime: '',
-      endTime: ''
-    }
-  ] };
-
-  allComplete: boolean = false;
+  week: Week =  weekData;
+  servicesPresets = serviceData;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  todos = [
-    { name: 'Woman Haircut', image: './assets/unDraw/jewelry_designer.svg' },
-    { name: 'Kids Haircut', image: './assets/unDraw/jewelry_designer.svg' },
-    { name: 'Nails', image: './assets/unDraw/barber.svg' },
-    { name: 'Facial', image: './assets/unDraw/barber.svg' },
-    { name: 'Man Haircut', image: './assets/unDraw/barber.svg' },
-    { name: 'Photographer', image: './assets/unDraw/photo.svg' },
-    { name: 'Realtor', image: './assets/unDraw/Realtor.svg' },
-  ];
-
+  presets$ = of(this.servicesPresets);
   services = [];
+
   constructor(private store: Store, private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -158,12 +102,8 @@ export class SetupAccountComponent implements OnInit {
       this.services = data.services || [];
       this.week = data.schedule;
     }
-    console.log(this.week);
-
   }
 
-  done = [];
-  todos$ = of(this.todos);
 
   submit() {
     let storage = {
@@ -183,7 +123,7 @@ export class SetupAccountComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      this.todos.push({ name: value, image: '' });
+      this.servicesPresets.push({ name: value, image: '' });
     }
 
     // Clear the input value

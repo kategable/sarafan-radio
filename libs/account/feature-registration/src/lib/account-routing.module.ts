@@ -1,3 +1,4 @@
+import { SharedUtilModule } from './../../../../shared-util/src/lib/shared-util.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationComponent } from './components/core/registration.component';
@@ -12,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)] ,
   exports: [RouterModule],
 })
 export class AccountRoutingModule {}
