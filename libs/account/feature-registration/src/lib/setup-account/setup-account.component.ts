@@ -1,7 +1,5 @@
-import { serviceData } from './../../../../../shared-util/src/lib/types/service-data';
-import { weekData } from './../../../../../shared-util/src/lib/types/weekdays-data';
-import { Week } from './../../../../../shared-util/src/lib/types/weekdays-type';
-
+import { AccountEntity } from './../+state/account.models';
+import { serviceData, Week, weekData } from '@sarafan/shared-util';
 
 import {
   CdkDragDrop,
@@ -78,7 +76,7 @@ export class SetupAccountComponent implements OnInit {
     scheduleCtrl: [''],
   });
 
-  week: Week =  weekData;
+  week: Week = weekData;
   servicesPresets = serviceData;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   presets$ = of(this.servicesPresets);
@@ -104,18 +102,28 @@ export class SetupAccountComponent implements OnInit {
     }
   }
 
-
   submit() {
     let storage = {
       form: this.mainFormGroup.value,
       services: this.services,
-      schedule: this.week
+      schedule: this.week,
     };
 
     localStorage.setItem('formdata', JSON.stringify(storage));
-    this.store.dispatch(
-      AccountActions.create({ account: { name: 'test', id: null } })
-    );
+    if(this.mainFormGroup.invalid) return;
+    const account: AccountEntity = {
+      id: new Date().toString(),
+      parentId: '',
+      firstName: this.firstFormGroup.get('firstCtrl').value,
+      lastName: this.firstFormGroup.get('lastCtrl').value,
+      address: this.secondFormGroup.get('addressCtrl').value,
+      email: this.firstFormGroup.get('emailCtrl').value,
+      companyName: this.firstFormGroup.get('compCtrl').value,
+      description: this.secondFormGroup.get('descCtrl').value,
+      services: this.services.map((s) => s.name),
+      schedule: this.week
+    };
+    this.store.dispatch(AccountActions.create({ account }));
   }
 
   add(event: MatChipInputEvent): void {
@@ -145,17 +153,16 @@ export class SetupAccountComponent implements OnInit {
     this.serviceInput.nativeElement.value = '';
     this.serviceCtrl.setValue(null);
   }
-  setTime(i: number){
-    this.week.days[i].startTime = this.week.days[i-1].startTime;
-    this.week.days[i].endTime = this.week.days[i-1].endTime;
+  setTime(i: number) {
+    this.week.days[i].startTime = this.week.days[i - 1].startTime;
+    this.week.days[i].endTime = this.week.days[i - 1].endTime;
     this.week.days[i].completed = true;
-
   }
-  setStartTime(e, i: number){
+  setStartTime(e, i: number) {
     this.week.days[i].startTime = e;
     this.week.days[i].completed = true;
   }
-  setEndTime(e, i: number){
+  setEndTime(e, i: number) {
     this.week.days[i].endTime = e;
   }
   // private _filter(value: string): string[] {

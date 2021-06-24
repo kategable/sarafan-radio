@@ -22,7 +22,7 @@ export class AppComponent {
   user$ = this.store.pipe(select(selectUser));
   loading$ = this.store.pipe(select(selectLoading));
   showShell = true;
-  isDebugVisible = false;
+  isDebugVisible = true;
   login() {
     this.store.dispatch(LoginAction({ url: '' }));
   }

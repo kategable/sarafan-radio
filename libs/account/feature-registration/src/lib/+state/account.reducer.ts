@@ -36,6 +36,19 @@ const accountReducer = createReducer(
   on(AccountActions.loadAccountFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(AccountActions.create, (state) => ({
+    ...state,
+    loaded: false,
+    error: null,
+  })),
+  on(AccountActions.createAccountSuccess, (state, { account }) =>
+    accountAdapter.addOne(account, { ...state, loaded: true , selectedId: account.id})
+  ),
+  on(AccountActions.createAccountFailure, (state, { error }) => ({
+    ...state,
+    selectedId: null,
+    error,
   }))
 );
 

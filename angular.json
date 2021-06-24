@@ -41,7 +41,9 @@
               "apps/shell-app/src/favicon.ico",
               "apps/shell-app/src/assets"
             ],
-            "styles": ["apps/shell-app/src/styles.scss"],
+            "styles": [
+              "apps/shell-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -104,7 +106,10 @@
               "apps/shell-app/tsconfig.app.json",
               "apps/shell-app/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/shell-app/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shell-app/**"
+            ]
           }
         },
         "test": {
@@ -117,7 +122,7 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
+          "builder": "@angular/fire:deploy",
           "options": {}
         }
       }
@@ -143,8 +148,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/shell-app-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/shell-app-e2e/**"]
+            "tsConfig": [
+              "apps/shell-app-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shell-app-e2e/**"
+            ]
           }
         }
       }
@@ -162,7 +172,10 @@
               "libs/providers/domain/tsconfig.lib.json",
               "libs/providers/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/providers/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/providers/domain/**"
+            ]
           }
         },
         "test": {
@@ -229,7 +242,10 @@
               "libs/ui/tsconfig.lib.json",
               "libs/ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ui/**"
+            ]
           }
         },
         "test": {
@@ -261,7 +277,10 @@
               "libs/account/domain/tsconfig.lib.json",
               "libs/account/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/account/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/account/domain/**"
+            ]
           }
         },
         "test": {
@@ -323,7 +342,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared-util"],
+          "outputs": [
+            "coverage/libs/shared-util"
+          ],
           "options": {
             "jestConfig": "libs/shared-util/jest.config.js",
             "passWithNoTests": true

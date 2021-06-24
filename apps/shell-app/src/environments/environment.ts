@@ -9,7 +9,16 @@ export const environment = {
   authDomain:'csa-app.auth0.com',
   path: 'http://localhost:4200',
   callback: 'http://localhost:4200/callback',
-  api:'http://sarafanradio.com/api'
+  api:'http://sarafanradio.com/api',
+  firebaseConfig: {
+    apiKey: "AIzaSyDp8D9tZK9RoECkQ8P39KPuH3MeSsxJsww",
+    authDomain: "sarafan-radio.firebaseapp.com",
+    projectId: "sarafan-radio",
+    storageBucket: "sarafan-radio.appspot.com",
+    messagingSenderId: "477294410027",
+    appId: "1:477294410027:web:dd375a9cf7a9ccd667ed6e",
+    measurementId: "G-6GQPGCGS15"
+  }
 }
 
 /*

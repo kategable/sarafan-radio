@@ -4,6 +4,7 @@ import { fetch } from '@nrwl/angular';
 
 import * as AccountFeature from './account.reducer';
 import * as AccountActions from './account.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountEffects {
@@ -23,6 +24,23 @@ export class AccountEffects {
       })
     )
   );
+  createAccount$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AccountActions.create),
+    fetch({
+      run: (action) => {
+     
+        // Your custom service 'load' logic goes here. For now just return a success action...
+        this.router.navigate(['/account']);
+        return AccountActions.createAccountSuccess({ account: action.account });
+      },
 
-  constructor(private actions$: Actions) {}
+      onError: (action, error) => {
+        console.error('Error', error);
+        return AccountActions.createAccountFailure({ error });
+      },
+    })
+  )
+);
+  constructor(private actions$: Actions,private router: Router) {}
 }

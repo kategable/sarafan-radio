@@ -17,7 +17,7 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-
+import { getSelected } from '@sarafan/account/feature-registration';
 
 @Component({
   selector: 'account-registration',
@@ -35,6 +35,7 @@ export class RegistrationComponent implements OnInit {
 
 
 
+  selected$ = this.store.select(getSelected);
   constructor(
     private store: Store,
     private _formBuilder: FormBuilder,

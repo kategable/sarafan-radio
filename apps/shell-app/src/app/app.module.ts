@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ShellComponent } from './components';
 import { MaterialModule } from './material.module';
+import { AngularFireModule } from '@angular/fire';
  // import localeRu from '@angular/common/locales/ru';
 // import { registerLocaleData } from '@angular/common';
 // registerLocaleData(localeRu, 'ru');
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
     HttpClientModule,
     RootStoreModule,
-    AuthModule.forRoot(environment)
+    AuthModule.forRoot(environment),
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     {

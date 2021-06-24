@@ -1,38 +1,62 @@
 <div class="container h-100" *ngIf="!isPitching">
-  <div class="row h-100  align-items-center justify-content-center">
-    <div class="d-flex align-items-center px-4 pb-3 ">
-      <mat-card (click)="gohome()" color="primary" matTooltip="click to go home" >
-        <mat-card-title>
-         Take me Home
-        </mat-card-title>
-        <img  class="large" src="./assets/unDraw/home.svg"
-          alt="home">
+  <div class="row h-100 align-items-center justify-content-center">
+    <ng-container *ngIf="selected$ | async as selected else noaccount">
+      <div class="d-flex align-items-center px-4 pb-3">
+        <mat-card
+          color="primary"
+          matTooltip="my account"
+        >
+          <mat-card-title> My Businees card</mat-card-title>
+          <mat-card-subtitle>{{ selected.firstName}}, {{ selected.lastName}}</mat-card-subtitle>
+          <mat-card-content>
+            <p>
+             {{selected.companyName}}
+            </p>
+            <mat-chip-list #chipList aria-label="service selection">
+              <mat-chip
+                *ngFor="let item of selected.services"
+                [selectable]="false"
+                [removable]="false" >
+                {{item}}
+              </mat-chip>
+              </mat-chip-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-container>
 
+    <ng-template #noaccount>
+      <div class="d-flex align-items-center px-4 pb-3">
+        <mat-card
+          color="primary"
+          matTooltip="click to setup provider account"
+          (click)="setup()"
+        >
+          <mat-card-title> I will provide services </mat-card-title>
+          <img
+            class="large"
+            src="./assets/unDraw/pitching.svg"
+            alt="service provider"
+          />
+        </mat-card>
+      </div>
+    </ng-template>
+
+    <div class="d-flex align-items-center px-4 pb-3">
+      <mat-card
+        (click)="gohome()"
+        color="primary"
+        matTooltip="click to go home"
+      >
+        <mat-card-title> Take me Home </mat-card-title>
+        <img class="large" src="./assets/unDraw/home.svg" alt="home" />
       </mat-card>
     </div>
-    <div class="d-flex align-items-center px-4 pb-3 ">
-      <mat-card color="primary" matTooltip="click to setup provider account" (click)="setup()">
-        <mat-card-title>
-          I will provide services
-        </mat-card-title>
-        <img class="large"
-          src="./assets/unDraw/pitching.svg" alt="service provider">
+    <div class="d-flex align-items-center px-4 pb-3">
+      <mat-card color="primary" matTooltip="click to setup client account">
+        <mat-card-title> I will consume services </mat-card-title>
+        <img class="large" src="./assets/unDraw/shopping.svg" alt="client" />
       </mat-card>
     </div>
-
-    <div class="d-flex align-items-center px-4 pb-3 ">
-      <mat-card color="primary" matTooltip="click to setup client account" >
-        <mat-card-title>
-         I will consume services
-        </mat-card-title>
-        <img  class="large" src="./assets/unDraw/shopping.svg"
-          alt="client">
-
-      </mat-card>
-    </div>
-
   </div>
-
 </div>
-
-

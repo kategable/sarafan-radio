@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RootEffects } from './+state/root.effects';
 import * as fromRoot from './+state/root.reducer';
-import { DebugEffects } from './debug/debug.effects';
+import { DebugEffects } from './debug/debug.effects'; 
 
 
 
