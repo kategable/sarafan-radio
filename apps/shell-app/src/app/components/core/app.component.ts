@@ -41,6 +41,7 @@ export class AppComponent {
   onDebug() {
     this.store.dispatch(changeLink({ link: 'debug' }));
     this.isDebugVisible = false;
+    console.log("sadas");
   }
   @HostListener('document:keydown', ['$event'])
   keypress(e: KeyboardEvent) {
