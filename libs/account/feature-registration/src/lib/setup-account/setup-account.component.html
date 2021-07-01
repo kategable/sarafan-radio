@@ -1,16 +1,26 @@
+<mat-form-field>
+  <mat-label>Nickname</mat-label>
+  <input matInput placeholder="nickname" [(ngModel)]="nickName">
+  <pre>
+    val: {{nickName | toxicity | json}}
+  </pre>
+</mat-form-field>
 <form [formGroup]="mainFormGroup" >
   <h2> Setup your service provider account</h2>
+
   <mat-vertical-stepper [linear]="false" #stepper>
+
     <mat-step  [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your info</span></ng-template>
-        <mat-form-field>
-          <mat-label>First Name {{ firstFormGroup.valid}}</mat-label>
-          <input matInput placeholder="First name" formControlName="firstCtrl" required>
-        </mat-form-field>
+
         <mat-form-field>
           <mat-label>Last Name</mat-label>
           <input matInput placeholder="Last name" formControlName="lastCtrl" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>First Name {{ firstFormGroup.valid}}</mat-label>
+          <input matInput placeholder="First name" formControlName="firstCtrl" required>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>

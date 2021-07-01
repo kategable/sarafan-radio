@@ -15,7 +15,8 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromAccount from './+state/account.reducer';
 import { AccountEffects } from './+state/account.effects';
 import { SetupAccountComponent } from './setup-account/setup-account.component';
-
+import { TFJSModule } from 'ngx-tfjs';
+import {EmojifyModule} from 'angular-emojify'
 @NgModule({
   imports: [
     CommonModule,
@@ -31,6 +32,8 @@ import { SetupAccountComponent } from './setup-account/setup-account.component';
       fromAccount.reducer
     ),
     EffectsModule.forFeature([AccountEffects]),
+    TFJSModule,
+    EmojifyModule
   ],
   declarations: [RegistrationComponent, SetupAccountComponent],
   exports: [RegistrationComponent],

@@ -56,16 +56,18 @@
     "@nrwl/angular": "12.3.6",
     "@nrwl/nx-cloud": "12.1.8",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "angular-emojify": "^1.0.0",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
+    "firebase": "^7.0 || ^8.0",
     "logrocket": "^1.0.8",
     "logrocket-ngrx": "^0.1.1",
     "ngx-build-plus": "^9.0.6",
     "ngx-material-timepicker": "^5.5.1",
+    "ngx-tfjs": "0.0.4",
     "rxjs": "6.5.5",
     "tslib": "^2.0.0",
-    "zone.js": "0.11.4",
-    "firebase": "^7.0 || ^8.0"
+    "zone.js": "0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.0.3",

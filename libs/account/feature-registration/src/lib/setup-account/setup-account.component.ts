@@ -81,7 +81,7 @@ export class SetupAccountComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   presets$ = of(this.servicesPresets);
   services = [];
-
+  nickName = '';
   constructor(private store: Store, private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
