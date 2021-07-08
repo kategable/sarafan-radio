@@ -11,12 +11,18 @@
         <mat-form-field>
           <mat-label>Last Name</mat-label>
           <input matInput placeholder="Last name" formControlName="lastCtrl" required>
+          <mat-error *ngIf="lastNameControl.hasError('required')">
+            Last Name is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>First Name </mat-label>
-          <input matInput placeholder="First name" formControlName="firstCtrl" required>
-          <mat-error *ngIf="firstNameControl.hasError('toxic')">
-            Firt Name is <strong>toxic</strong>
+          <input [errorStateMatcher]="matcher"  matInput placeholder="First name" formControlName="firstCtrl" >
+          <mat-error *ngIf="firstNameControl.errors?.toxic">
+            First Name is <strong>toxic</strong>
+          </mat-error>
+          <mat-error *ngIf="firstNameControl.hasError('required')">
+            First Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field>

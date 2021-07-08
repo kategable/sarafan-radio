@@ -1,4 +1,6 @@
- import { AccountEntity } from './../+state/account.models';
+import { debounceTime } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { AccountEntity } from './../+state/account.models';
 import { serviceData, Week, weekData } from '@sarafan/shared-util';
 
 import {
@@ -8,6 +10,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -28,7 +31,6 @@ import {
 import { MatChipInputEvent } from '@angular/material/chips';
 import { of } from 'rxjs';
 import { AsyncToxicValidator } from '../validators/toxicity.validator';
-import { AsyncToxicityValidator1 } from '../validators/toxicity.validator copy';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -59,13 +61,17 @@ export class SetupAccountComponent implements OnInit {
     Validators.email,
   ]);
 
-
   firstFormGroup: FormGroup = this._formBuilder.group({
-    firstCtrl: ['',Validators.required, this.asyncValidator.toxicityValidator],
+    firstCtrl: new FormControl(
+      { value: '', disabled: false},
+      [Validators.required],
+      [this.asyncValidator.toxicityValidator()]
+    ),
     lastCtrl: ['', Validators.required],
     compCtrl: [''],
     emailCtrl: this.emailFormControl,
   });
+
   secondFormGroup: FormGroup = this._formBuilder.group({
     addressCtrl: ['', Validators.required],
     descCtrl: ['', Validators.required],
@@ -79,6 +85,11 @@ export class SetupAccountComponent implements OnInit {
   get firstNameControl(): FormControl {
     return this.firstFormGroup.get('firstCtrl') as FormControl;
   }
+  get lastNameControl(): FormControl {
+    return this.firstFormGroup.get('lastCtrl') as FormControl;
+  }
+
+
   thirdFormGroup: FormGroup = this._formBuilder.group({
     scheduleCtrl: [''],
   });
@@ -88,9 +99,11 @@ export class SetupAccountComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   presets$ = of(this.servicesPresets);
   services = [];
-  nickName = '';
-  constructor(private store: Store, private _formBuilder: FormBuilder,
-    private readonly asyncValidator : AsyncToxicValidator) {}
+  constructor(
+    private store: Store,
+    private _formBuilder: FormBuilder,
+    private readonly asyncValidator: AsyncToxicValidator
+  ) {}
 
   ngOnInit() {
     this.mainFormGroup = this._formBuilder.group({
@@ -98,7 +111,9 @@ export class SetupAccountComponent implements OnInit {
       secondFormGroup: this.secondFormGroup,
       thirdFormGroup: this.thirdFormGroup,
     });
-    //this.load();
+    this.load();
+
+
   }
 
   load(): void {
@@ -118,7 +133,7 @@ export class SetupAccountComponent implements OnInit {
     };
 
     localStorage.setItem('formdata', JSON.stringify(storage));
-    if(this.mainFormGroup.invalid) return;
+    if (this.mainFormGroup.invalid) return;
     const account: AccountEntity = {
       id: new Date().toString(),
       parentId: '',
@@ -129,7 +144,7 @@ export class SetupAccountComponent implements OnInit {
       companyName: this.firstFormGroup.get('compCtrl').value,
       description: this.secondFormGroup.get('descCtrl').value,
       services: this.services.map((s) => s.name),
-      schedule: this.week
+      schedule: this.week,
     };
     this.store.dispatch(AccountActions.create({ account }));
   }

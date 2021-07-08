@@ -1,9 +1,9 @@
 import { MyToxicityPipe } from './toxicity.pipe';
 import { Injectable } from "@angular/core";
 import { AbstractControl, AsyncValidatorFn } from "@angular/forms";
-import { ToxicityPipe, ToxicityService } from "ngx-tfjs";
+import { Prediction, ToxicityPipe, ToxicityService } from "ngx-tfjs";
 import { Observable, of } from "rxjs";
-import { map, debounceTime, take, switchMap, catchError } from "rxjs/operators";
+import { map, debounceTime, take, switchMap, catchError, distinctUntilChanged } from "rxjs/operators";
 
 
 function isEmptyInputValue(value: any): boolean {
@@ -17,7 +17,7 @@ function isEmptyInputValue(value: any): boolean {
 export class AsyncToxicValidator {
 
   constructor(private readonly pipe: MyToxicityPipe) {
-     
+
 
   }
 
@@ -28,27 +28,28 @@ export class AsyncToxicValidator {
       | Promise<{ [key: string]: any } | null>
       | Observable<{ [key: string]: any } | null> => {
       if (isEmptyInputValue(control.value)) {
-        debugger;
         return of(null);
       } else if (control.value === initialValue) {
-        debugger;
         return of(null);
       } else {
-        debugger;
         return control.valueChanges.pipe(
+          distinctUntilChanged(),
           debounceTime(500),
           take(1),
           switchMap(_ =>
             this.pipe.transform(control.value)
               .pipe(
-                map((data: any) =>
+                map((data: Prediction[]) =>
                     {
-                      console.log('toxic',data);
                       if(!data) return null;
-                      let match = data["_value"].some((v: any)=> v["match"])
-                      return match ? { toxic: true } : null;
+                      console.log("toxicity-checker",data);
+                      let match = data.some((v: Prediction)=> v.match);
+                      let r =  match ? { toxic: true } : null;
+                      control.setErrors(r);
+                      return r;
+
                     }
-                ) )
+                ),catchError(() => of(null)) )
               )
           )
       }
