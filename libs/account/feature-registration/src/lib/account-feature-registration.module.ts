@@ -1,3 +1,4 @@
+import { SharedUtilModule } from './../../../../shared-util/src/lib/shared-util.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountDomainModule } from '@sarafan/account/domain';
@@ -16,7 +17,7 @@ import * as fromAccount from './+state/account.reducer';
 import { AccountEffects } from './+state/account.effects';
 import { SetupAccountComponent } from './setup-account/setup-account.component';
 import { TFJSModule } from 'ngx-tfjs';
-import {EmojifyModule} from 'angular-emojify'
+import { MyToxicityPipe } from './validators/toxicity.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -32,10 +33,9 @@ import {EmojifyModule} from 'angular-emojify'
       fromAccount.reducer
     ),
     EffectsModule.forFeature([AccountEffects]),
-    TFJSModule,
-    EmojifyModule
+    TFJSModule
   ],
   declarations: [RegistrationComponent, SetupAccountComponent],
-  exports: [RegistrationComponent],
+  exports: [RegistrationComponent]
 })
 export class AccountFeatureRegistrationModule {}

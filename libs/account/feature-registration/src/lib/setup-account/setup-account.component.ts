@@ -1,4 +1,4 @@
-import { AccountEntity } from './../+state/account.models';
+ import { AccountEntity } from './../+state/account.models';
 import { serviceData, Week, weekData } from '@sarafan/shared-util';
 
 import {
@@ -27,6 +27,8 @@ import {
 } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { of } from 'rxjs';
+import { AsyncToxicValidator } from '../validators/toxicity.validator';
+import { AsyncToxicityValidator1 } from '../validators/toxicity.validator copy';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
     control: FormControl | null,
@@ -56,8 +58,10 @@ export class SetupAccountComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
+
+
   firstFormGroup: FormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+    firstCtrl: ['',Validators.required, this.asyncValidator.toxicityValidator],
     lastCtrl: ['', Validators.required],
     compCtrl: [''],
     emailCtrl: this.emailFormControl,
@@ -72,6 +76,9 @@ export class SetupAccountComponent implements OnInit {
     return this.secondFormGroup.get('serviceCtrl') as FormControl;
   }
 
+  get firstNameControl(): FormControl {
+    return this.firstFormGroup.get('firstCtrl') as FormControl;
+  }
   thirdFormGroup: FormGroup = this._formBuilder.group({
     scheduleCtrl: [''],
   });
@@ -82,7 +89,8 @@ export class SetupAccountComponent implements OnInit {
   presets$ = of(this.servicesPresets);
   services = [];
   nickName = '';
-  constructor(private store: Store, private _formBuilder: FormBuilder) {}
+  constructor(private store: Store, private _formBuilder: FormBuilder,
+    private readonly asyncValidator : AsyncToxicValidator) {}
 
   ngOnInit() {
     this.mainFormGroup = this._formBuilder.group({
@@ -90,7 +98,7 @@ export class SetupAccountComponent implements OnInit {
       secondFormGroup: this.secondFormGroup,
       thirdFormGroup: this.thirdFormGroup,
     });
-    this.load();
+    //this.load();
   }
 
   load(): void {

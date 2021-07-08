@@ -1,10 +1,4 @@
-<mat-form-field>
-  <mat-label>Nickname</mat-label>
-  <input matInput placeholder="nickname" [(ngModel)]="nickName">
-  <pre>
-    val: {{nickName | toxicity | json}}
-  </pre>
-</mat-form-field>
+
 <form [formGroup]="mainFormGroup" >
   <h2> Setup your service provider account</h2>
 
@@ -19,8 +13,11 @@
           <input matInput placeholder="Last name" formControlName="lastCtrl" required>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>First Name {{ firstFormGroup.valid}}</mat-label>
+          <mat-label>First Name </mat-label>
           <input matInput placeholder="First name" formControlName="firstCtrl" required>
+          <mat-error *ngIf="firstNameControl.hasError('toxic')">
+            Firt Name is <strong>toxic</strong>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
