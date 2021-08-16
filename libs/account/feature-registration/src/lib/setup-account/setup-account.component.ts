@@ -64,8 +64,8 @@ export class SetupAccountComponent implements OnInit {
   firstFormGroup: FormGroup = this._formBuilder.group({
     firstCtrl: new FormControl(
       { value: '', disabled: false},
-      [Validators.required],
-      [this.asyncValidator.toxicityValidator()]
+      [Validators.required]
+     //,[this.asyncValidator.toxicityValidator()]
     ),
     lastCtrl: ['', Validators.required],
     compCtrl: [''],

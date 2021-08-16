@@ -41,7 +41,10 @@ export class AsyncToxicValidator {
               .pipe(
                 map((data: Prediction[]) =>
                     {
-                      if(!data) return null;
+                      if(!data) {
+                        control.setErrors(null);
+                        return null;
+                      }
                       console.log("toxicity-checker",data);
                       let match = data.some((v: Prediction)=> v.match);
                       let r =  match ? { toxic: true } : null;

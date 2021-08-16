@@ -1,23 +1,25 @@
-
-<form [formGroup]="mainFormGroup" >
-  <h2> Setup your service provider account</h2>
+<form [formGroup]="mainFormGroup">
+  <h2>Setup your service provider account</h2>
 
   <mat-vertical-stepper [linear]="false" #stepper>
-
-    <mat-step  [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your info</span></ng-template>
-
-        <mat-form-field>
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="Last name" formControlName="lastCtrl" required>
-          <mat-error *ngIf="lastNameControl.hasError('required')">
-            Last Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
+        <ng-template matStepLabel
+          ><span [ngClass]="!firstFormGroup.valid ? 'error' : ''"
+            >Fill out your info</span
+          ></ng-template
+        >
+        <div *ngIf="!firstFormGroup.valid">
+          <span>Errors:{{ firstFormGroup.errors }}</span>
+        </div>
         <mat-form-field>
           <mat-label>First Name </mat-label>
-          <input [errorStateMatcher]="matcher"  matInput placeholder="First name" formControlName="firstCtrl" >
+          <input
+            [errorStateMatcher]="matcher"
+            matInput
+            placeholder="First name"
+            formControlName="firstCtrl"
+          />
           <mat-error *ngIf="firstNameControl.errors?.toxic">
             First Name is <strong>toxic</strong>
           </mat-error>
@@ -26,10 +28,34 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Last name"
+            formControlName="lastCtrl"
+            required
+          />
+          <mat-error *ngIf="lastNameControl.hasError('required')">
+            Last Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
           <mat-label>Email</mat-label>
-          <input type="email" [errorStateMatcher]="matcher" matInput placeholder="Ex. pat@example.com"
-            [formControl]="emailFormControl" required>
-          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          <input
+            type="email"
+            [errorStateMatcher]="matcher"
+            matInput
+            placeholder="Ex. pat@example.com"
+            [formControl]="emailFormControl"
+            required
+          />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
             Please enter a valid email address
           </mat-error>
           <mat-error *ngIf="emailFormControl.hasError('required')">
@@ -38,7 +64,11 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Company Name</mat-label>
-          <input matInput placeholder="Company name" formControlName="compCtrl">
+          <input
+            matInput
+            placeholder="Company name"
+            formControlName="compCtrl"
+          />
         </mat-form-field>
         <div>
           <button color="primary" mat-raised-button matStepperNext>Next</button>
@@ -47,23 +77,34 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your service</span></ng-template>
+        <ng-template matStepLabel
+          ><span [ngClass]="!firstFormGroup.valid ? 'error' : ''"
+            >Fill out your service</span
+          ></ng-template
+        >
         <div class="row">
           <mat-form-field class="col-8">
             <mat-label>Service Address</mat-label>
-            <input matInput formControlName="addressCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            <input
+              matInput
+              formControlName="addressCtrl"
+              placeholder="Ex. 1 Main St, New York, NY"
+              required
+            />
           </mat-form-field>
         </div>
         <div class="row">
-
           <mat-form-field class="col-8">
             <mat-label>Service Description</mat-label>
-            <textarea matInput formControlName="descCtrl" placeholder="describe" required></textarea>
+            <textarea
+              matInput
+              formControlName="descCtrl"
+              placeholder="describe"
+              required
+            ></textarea>
           </mat-form-field>
         </div>
         <div class="row">
-
-
           <mat-form-field class="example-chip-list">
             <mat-label>Service</mat-label>
             <mat-chip-list #chipList aria-label="service selection">
@@ -71,9 +112,10 @@
                 *ngFor="let item of services"
                 [selectable]="true"
                 [removable]="true"
-                (removed)="remove(item.name)">
-                {{item.name}}
-                <mat-icon matChipRemove >cancel</mat-icon>
+                (removed)="remove(item.name)"
+              >
+                {{ item.name }}
+                <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
               <input
                 placeholder="your service..."
@@ -82,15 +124,21 @@
                 [matAutocomplete]="auto"
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="add($event)"
+              />
             </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option *ngFor="let set of presets$ | async" [value]="set.name">
-                {{set.name}}
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              (optionSelected)="selected($event)"
+            >
+              <mat-option
+                *ngFor="let set of presets$ | async"
+                [value]="set.name"
+              >
+                {{ set.name }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-
         </div>
         <div>
           <button mat-raised-button matStepperPrevious>Back</button>
@@ -100,29 +148,58 @@
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel><span [ngClass]="!firstFormGroup.valid ? 'error' : '' " >Fill out your schedule</span></ng-template>
+        <ng-template matStepLabel
+          ><span [ngClass]="!firstFormGroup.valid ? 'error' : ''"
+            >Fill out your schedule</span
+          ></ng-template
+        >
         <div class="row">
           <section class="week-section col">
             <ul class="container-fluid">
-              <li *ngFor="let day of week.days;  index as i" class=' '>
-                <mat-checkbox class="pt-0  pr-3" [checked]="day.completed" [color]="day.color">
-                  {{day.name}}
+              <li *ngFor="let day of week.days; index as i" class=" ">
+                <mat-checkbox
+                  class="pt-0 pr-3"
+                  [checked]="day.completed"
+                  [color]="day.color"
+                >
+                  {{ day.name }}
                 </mat-checkbox>
-                <mat-checkbox (change)="setTime(i)" *ngIf="day.name != 'Monday'"class="pt-0  pr-3 b-1" >
-                  Same as {{week.days[i-1].name}}
+                <mat-checkbox
+                  (change)="setTime(i)"
+                  *ngIf="day.name != 'Monday'"
+                  class="pt-0 pr-3 b-1"
+                >
+                  Same as {{ week.days[i - 1].name }}
                 </mat-checkbox>
                 <mat-form-field class="pt-0 pr-3">
                   <mat-label>Start time</mat-label>
-                  <input [ngxTimepicker]="pickerTimeS" autocomplete="off" matInput [value]="day.startTime" >
-                  <ngx-material-timepicker (timeSet)="setStartTime($event,i)" [defaultTime]="day.startTime" #pickerTimeS></ngx-material-timepicker>
+                  <input
+                    [ngxTimepicker]="pickerTimeS"
+                    autocomplete="off"
+                    matInput
+                    [value]="day.startTime"
+                  />
+                  <ngx-material-timepicker
+                    (timeSet)="setStartTime($event, i)"
+                    [defaultTime]="day.startTime"
+                    #pickerTimeS
+                  ></ngx-material-timepicker>
                 </mat-form-field>
 
-                <mat-form-field class="pt-0  ">
+                <mat-form-field class="pt-0">
                   <mat-label>End time</mat-label>
-                  <input [ngxTimepicker]="pickerTimeE" autocomplete="off" matInput [value]="day.endTime" >
-                  <ngx-material-timepicker (timeSet)="setEndTime($event,i)" [defaultTime]="day.endTime" #pickerTimeE></ngx-material-timepicker>
+                  <input
+                    [ngxTimepicker]="pickerTimeE"
+                    autocomplete="off"
+                    matInput
+                    [value]="day.endTime"
+                  />
+                  <ngx-material-timepicker
+                    (timeSet)="setEndTime($event, i)"
+                    [defaultTime]="day.endTime"
+                    #pickerTimeE
+                  ></ngx-material-timepicker>
                 </mat-form-field>
-
               </li>
             </ul>
           </section>
@@ -138,8 +215,15 @@
       <p>You are now done.</p>
       <div>
         <button mat-raised-button matStepperPrevious>Back</button>
-        <button mat-raised-button (click)="stepper.reset(); ">Reset</button>
-        <button (click)='submit()' mat-raised-button color="primary" [disabled]="!mainFormGroup.valid">Submit</button>
+        <button mat-raised-button (click)="stepper.reset()">Reset</button>
+        <button
+          (click)="submit()"
+          mat-raised-button
+          color="primary"
+          [disabled]="!mainFormGroup.valid"
+        >
+          Submit
+        </button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
