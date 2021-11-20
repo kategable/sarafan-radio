@@ -13,7 +13,9 @@ export class ProvidersEffects {
       switchMap(() =>
         this.providerDataService.load().pipe(
           map((i) => ProvidersActions.loadProvidersSuccess({ providers: i })),
-          catchError(async (error) => ProvidersActions.loadProvidersFailure({ error }))
+          catchError(async (error) =>
+            ProvidersActions.loadProvidersFailure({ error })
+          )
         )
       )
     )

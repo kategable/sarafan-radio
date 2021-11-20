@@ -44,11 +44,9 @@ export class RootEffects {
     () =>
       this.actions$.pipe(
         ofType(RootActions.changeLink),
-        switchMap(routeParam =>{
-         return  this.router.navigate(['/' + routeParam.link]);
-
+        switchMap((routeParam) => {
+          return this.router.navigate(['/' + routeParam.link]);
         })
-
       ),
     { dispatch: false }
   );

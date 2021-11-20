@@ -20,7 +20,6 @@ export class AccountEffects {
   //   )
   // );
 
-
   // init$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(AccountActions.init),
@@ -54,6 +53,6 @@ export class AccountEffects {
   //     },
   //   })
   // )
-//);
-  constructor(private actions$: Actions,private router: Router) {}
+  //);
+  constructor(private actions$: Actions, private router: Router) {}
 }
