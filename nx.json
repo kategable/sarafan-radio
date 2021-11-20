@@ -14,40 +14,36 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 1
       }
     }
   },
-  "projects": {
-    "shell-app": {
-      "tags": []
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "shell-app",
+  "generators": {
+    "@nrwl/angular:application": {
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
-    "shell-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["shell-app"]
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     },
-    "providers-domain": {
-      "tags": ["domain:providers", "type:domain-logic"]
-    },
-    "providers-feature-search": {
-      "tags": ["domain:providers", "type:feature"]
-    },
-    "ui": {
-      "tags": [
-        "domain:account",
-        "shell-app",
-        "domain:providers",
-        "domain:shared"
-      ]
-    },
-    "account-domain": {
-      "tags": ["domain:account", "type:domain-logic"]
-    },
-    "account-feature-registration": {
-      "tags": ["domain:account", "type:feature"]
-    },
-    "shared-util": {
-      "tags": []
-    }
+    "@nrwl/angular:component": {}
+  },
+  "affected": {
+    "defaultBase": "master"
   }
 }

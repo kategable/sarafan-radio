@@ -6,10 +6,10 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { NxModule, DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 
 import { ProvidersEffects } from './providers.effects';
 import * as ProvidersActions from './providers.actions';
+import { hot } from 'jasmine-marbles';
 
 describe('ProvidersEffects', () => {
   let actions: Observable<any>;
@@ -22,8 +22,8 @@ describe('ProvidersEffects', () => {
         ProvidersEffects,
         DataPersistence,
         provideMockActions(() => actions),
-        provideMockStore()
-      ]
+        provideMockStore(),
+      ],
     });
 
     effects = TestBed.get(ProvidersEffects);
@@ -34,7 +34,7 @@ describe('ProvidersEffects', () => {
       actions = hot('-a-|', { a: ProvidersActions.loadProviders() });
 
       const expected = hot('-a-|', {
-        a: ProvidersActions.loadProvidersSuccess({ providers: [] })
+        a: ProvidersActions.loadProvidersSuccess({ providers: [] }),
       });
 
       expect(effects.loadProviders$).toBeObservable(expected);
