@@ -13,13 +13,11 @@ export class ProvidersEffects {
   this.actions$.pipe(
     ofType(ProvidersActions.loadProviders),
     fetch({
-      run: () => {
-        console.log("effect")
+      run: (action) => {
         return this.providerDataService.load().pipe(map(i=>{
           return ProvidersActions.loadProvidersSuccess({ providers: i });
         }))
       },
-
       onError: (action, error) => {
         console.error('Error', error);
         return ProvidersActions.loadProvidersFailure({ error });
