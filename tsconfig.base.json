@@ -24,7 +24,6 @@
       "@sarafan/providers/feature-search": [
         "libs/providers/feature-search/src/index.ts"
       ],
-      "@sarafan/shared-util": ["libs/shared-util/src/index.ts"],
       "@sarafan/ui": ["libs/ui/src/index.ts"]
     }
   },

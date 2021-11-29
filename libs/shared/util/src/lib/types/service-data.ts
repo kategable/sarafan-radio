@@ -1,4 +1,4 @@
-import { Service } from "./service-type";
+import { Service } from './service-type';
 
 export const serviceData: Service[] = [
   { name: 'Woman Haircut', image: './assets/unDraw/jewelry_designer.svg' },

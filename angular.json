@@ -14,7 +14,10 @@
               "libs/account/domain/tsconfig.lib.json",
               "libs/account/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/account/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/account/domain/**"
+            ]
           }
         },
         "test": {
@@ -32,7 +35,10 @@
           "style": "scss"
         }
       },
-      "tags": ["domain:account", "type:domain-logic"]
+      "tags": [
+        "domain:account",
+        "type:domain-logic"
+      ]
     },
     "account-feature-registration": {
       "projectType": "library",
@@ -68,7 +74,10 @@
           "style": "scss"
         }
       },
-      "tags": ["domain:account", "type:feature"]
+      "tags": [
+        "domain:account",
+        "type:feature"
+      ]
     },
     "providers-domain": {
       "projectType": "library",
@@ -83,7 +92,10 @@
               "libs/providers/domain/tsconfig.lib.json",
               "libs/providers/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/providers/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/providers/domain/**"
+            ]
           }
         },
         "test": {
@@ -101,7 +113,10 @@
           "style": "scss"
         }
       },
-      "tags": ["domain:providers", "type:domain-logic"]
+      "tags": [
+        "domain:providers",
+        "type:domain-logic"
+      ]
     },
     "providers-feature-search": {
       "projectType": "library",
@@ -137,19 +152,24 @@
           "style": "scss"
         }
       },
-      "tags": ["domain:providers", "type:feature"]
+      "tags": [
+        "domain:providers",
+        "type:feature"
+      ]
     },
     "shared-util": {
       "projectType": "library",
-      "root": "libs/shared-util",
-      "sourceRoot": "libs/shared-util/src",
+      "root": "libs/shared/util",
+      "sourceRoot": "libs/shared/util/src",
       "prefix": "sarafan",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared-util"],
+          "outputs": [
+            "coverage/libs/shared/util"
+          ],
           "options": {
-            "jestConfig": "libs/shared-util/jest.config.js",
+            "jestConfig": "libs/shared/util/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -157,13 +177,13 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/shared-util/src/**/*.ts",
-              "libs/shared-util/src/**/*.html"
+              "libs/shared/util/src/**/*.ts",
+              "libs/shared/util/src/**/*.html"
             ]
           }
         }
       },
-      "tags": []
+      "tags": ["scope:shared", "type:util"]
     },
     "shell-app": {
       "projectType": "application",
@@ -189,7 +209,9 @@
               "apps/shell-app/src/favicon.ico",
               "apps/shell-app/src/assets"
             ],
-            "styles": ["apps/shell-app/src/styles.scss"],
+            "styles": [
+              "apps/shell-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -259,7 +281,10 @@
               "apps/shell-app/tsconfig.app.json",
               "apps/shell-app/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/shell-app/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shell-app/**"
+            ]
           }
         },
         "test": {
@@ -299,13 +324,20 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/shell-app-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/shell-app-e2e/**"]
+            "tsConfig": [
+              "apps/shell-app-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/shell-app-e2e/**"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["shell-app"]
+      "implicitDependencies": [
+        "shell-app"
+      ]
     },
     "ui": {
       "projectType": "library",
@@ -320,7 +352,10 @@
               "libs/ui/tsconfig.lib.json",
               "libs/ui/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ui/**"
+            ]
           }
         },
         "test": {

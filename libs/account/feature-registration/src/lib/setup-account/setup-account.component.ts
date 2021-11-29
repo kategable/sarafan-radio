@@ -1,7 +1,7 @@
 import { debounceTime } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { AccountEntity } from './../+state/account.models';
-import { serviceData, Week, weekData } from '@sarafan/shared-util';
+import { serviceData, Week, weekData } from '@sarafan/sh';
 
 import {
   CdkDragDrop,
@@ -63,9 +63,9 @@ export class SetupAccountComponent implements OnInit {
 
   firstFormGroup: FormGroup = this._formBuilder.group({
     firstCtrl: new FormControl(
-      { value: '', disabled: false},
+      { value: '', disabled: false },
       [Validators.required]
-     //,[this.asyncValidator.toxicityValidator()]
+      //,[this.asyncValidator.toxicityValidator()]
     ),
     lastCtrl: ['', Validators.required],
     compCtrl: [''],
@@ -89,7 +89,6 @@ export class SetupAccountComponent implements OnInit {
     return this.firstFormGroup.get('lastCtrl') as FormControl;
   }
 
-
   thirdFormGroup: FormGroup = this._formBuilder.group({
     scheduleCtrl: [''],
   });
@@ -112,8 +111,6 @@ export class SetupAccountComponent implements OnInit {
       thirdFormGroup: this.thirdFormGroup,
     });
     this.load();
-
-
   }
 
   load(): void {
