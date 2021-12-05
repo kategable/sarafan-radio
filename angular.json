@@ -183,7 +183,7 @@
           }
         }
       },
-      "tags": ["scope:shared", "type:util"]
+      "tags": ["scope:shared"]
     },
     "shell-app": {
       "projectType": "application",
@@ -301,7 +301,7 @@
           "options": {}
         }
       },
-      "tags": []
+      "tags": ["scope:client"]
     },
     "shell-app-e2e": {
       "root": "apps/shell-app-e2e",
@@ -334,7 +334,7 @@
           }
         }
       },
-      "tags": [],
+      "tags": ["scope:client"],
       "implicitDependencies": [
         "shell-app"
       ]
@@ -377,7 +377,7 @@
         "domain:account",
         "shell-app",
         "domain:providers",
-        "domain:shared"
+        "scope:shared"
       ]
     }
   }

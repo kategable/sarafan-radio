@@ -1,7 +1,7 @@
 import { debounceTime } from 'rxjs/operators';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { AccountEntity } from './../+state/account.models';
-import { serviceData, Week, weekData } from '@sarafan/sh';
+import { serviceData, Week, weekData } from '@sarafan/shared/util';
 
 import {
   CdkDragDrop,
