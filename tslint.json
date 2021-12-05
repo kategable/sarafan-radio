@@ -78,23 +78,31 @@
         "allow": [],
         "depConstraints": [
           {
-            "sourceTag": "*",
+            "sourceTag": "scope:client",
             "onlyDependOnLibsWithTags": [
-              "*"
+              "scope:client",
+              "type:shared",
+              "type:feature"
             ]
           },
           {
             "sourceTag": "domain:providers",
             "onlyDependOnLibsWithTags": [
               "domain:providers",
-              "domain:shared"
+              "type:shared"
             ]
           },
           {
             "sourceTag": "domain:account",
             "onlyDependOnLibsWithTags": [
               "domain:account",
-              "domain:shared"
+              "type:shared"
+            ]
+          },
+          {
+            "sourceTag": "scope:shared",
+            "onlyDependOnLibsWithTags": [
+              "type:shared"
             ]
           }
         ]

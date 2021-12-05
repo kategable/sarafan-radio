@@ -183,7 +183,7 @@
           }
         }
       },
-      "tags": ["scope:shared"]
+      "tags": ["scope:shared", "type:shared"]
     },
     "shell-app": {
       "projectType": "application",
@@ -374,10 +374,7 @@
         }
       },
       "tags": [
-        "domain:account",
-        "shell-app",
-        "domain:providers",
-        "scope:shared"
+        "scope:shared", "type:ui"
       ]
     }
   }
