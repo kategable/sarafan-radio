@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
+  CanActivate,
   RouterStateSnapshot,
   UrlTree,
-  CanActivate
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
-import { AuthService } from '../../services/auth.service';
-import { RootState, selectUser, isAuthenticated } from '../../../+state/root.selectors';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { LoginAction } from '../../../+state/root.actions';
+import { isAuthenticated, RootState } from '../../../+state/root.selectors';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(private store: Store<RootState>) {}
@@ -23,7 +22,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean | UrlTree> | boolean {
     return this.store.pipe(select(isAuthenticated)).pipe(
-      tap(loggedIn => {
+      tap((loggedIn) => {
         if (!loggedIn) {
           this.store.dispatch(LoginAction({ url: state.url }));
         }

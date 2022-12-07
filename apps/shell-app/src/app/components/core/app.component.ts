@@ -1,28 +1,24 @@
 import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppState } from '../../+state/root.reducer';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
+  changeLink,
   LoginAction,
   LogoutAction,
-  changeLink
 } from '../../+state/root.actions';
-import { selectUser, RootState, selectLoading } from '../../+state/root.selectors';
+import { isLoading, RootState, user } from '../../+state/root.selectors';
 import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'sarafan-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   constructor(private store: Store<RootState>, private api: ApiService) {}
-  title = 'shell';
-  responseJson: string;
-  user$ = this.store.pipe(select(selectUser));
-  loading$ = this.store.pipe(select(selectLoading));
-  showShell = true;
-  isDebugVisible = true;
+
+  user$ = this.store.pipe(select(user));
+  loading$ = this.store.pipe(select(isLoading));
+
   login() {
     this.store.dispatch(LoginAction({ url: '' }));
   }
@@ -32,8 +28,13 @@ export class AppComponent {
   register() {
     this.store.dispatch(changeLink({ link: 'account' }));
   }
+
+
+
+
+  
   pingApi() {
-    this.api.ping$().subscribe(res => (this.responseJson = res));
+    this.api.ping$().subscribe((res) => (this.responseJson = res));
   }
   changeRoute(link) {
     this.store.dispatch(changeLink({ link }));
@@ -41,7 +42,7 @@ export class AppComponent {
   onDebug() {
     this.store.dispatch(changeLink({ link: 'debug' }));
     this.isDebugVisible = false;
-    console.log("sadas");
+    console.log('sadas');
   }
   @HostListener('document:keydown', ['$event'])
   keypress(e: KeyboardEvent) {

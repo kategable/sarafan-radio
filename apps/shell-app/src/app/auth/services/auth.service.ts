@@ -1,37 +1,48 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
-import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import {  Store } from '@ngrx/store';
-import { IEnvironment } from '../auth.module';
-import { AppState } from '../../+state/root.reducer';
+import { Store } from '@ngrx/store';
+import {
+  BehaviorSubject,
+  combineLatest,
+  from,
+  Observable,
+  of,
+  throwError,
+} from 'rxjs';
+import { catchError, concatMap, shareReplay, tap } from 'rxjs/operators';
 import * as RootActions from '../../+state/root.actions';
+import { AppState } from '../../+state/root.reducer';
 import { UserEntity } from '../../+state/user-entity.type';
+import { IEnvironment } from '../auth.module';
 
 //import { State } from '../../root-store/reducers/reducer';
 //import * as StoreActions from '../../root-store/actions/actions'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   //constructor(private router: Router,private store: Store<State>,  @Inject('env') private environment: IEnvironment) { }
-  constructor(private router: Router ,  @Inject('env') private environment: IEnvironment,private store: Store<AppState>) { }
-
+  constructor(
+    private router: Router,
+    @Inject('env') private environment: IEnvironment,
+    private store: Store<AppState>
+  ) {}
 
   // Create an observable of Auth0 instance of client
-  auth0Client$ = (from(
-    createAuth0Client({
-      domain: this.environment.authDomain,
-      client_id: this.environment.authClient,
-      redirect_uri: this.environment.callback
-    })
-  ) as Observable<Auth0Client>).pipe(
+  auth0Client$ = (
+    from(
+      createAuth0Client({
+        domain: this.environment.authDomain,
+        client_id: this.environment.authClient,
+        redirect_uri: this.environment.callback,
+      })
+    ) as Observable<Auth0Client>
+  ).pipe(
     shareReplay(1), // Every subscription receives the same shared value
-    catchError(err => throwError(err))
+    catchError((err) => throwError(err))
   );
   // Define observables for SDK methods that return promises by default
   // For each Auth0 SDK method, first ensure the client instance is ready
@@ -47,8 +58,6 @@ export class AuthService {
   private userProfileSubject$ = new BehaviorSubject<any>(null);
   userProfile$ = this.userProfileSubject$.asObservable();
   // Create a local property for login status
-
-
 
   // getUser$() is a method because options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
@@ -71,26 +80,32 @@ export class AuthService {
         return of(loggedIn);
       })
     );
-    const checkAuthSub = checkAuth$.subscribe((response: { [key: string]: any } | boolean) => {
-      // If authenticated, response will be user object
-      // If not authenticated, response will be 'false'
-      // Set subjects appropriately
-      if (response) {
-        console.log("response:",response)
-        const user = response as UserEntity;
-        user.loggedIn = true;
-        this.userProfileSubject$.next(user);
-        this.store.dispatch(RootActions.loadUserSuccess({ userData: user }));
-      }else{
-        this.store.dispatch(RootActions.loadUserFailure({ error: "unable to login" }));
+    const checkAuthSub = checkAuth$.subscribe(
+      (response: { [key: string]: any } | boolean) => {
+        // If authenticated, response will be user object
+        // If not authenticated, response will be 'false'
+        // Set subjects appropriately
+        if (response) {
+          console.log('response:', response);
+          const user = response as UserEntity;
+          user.loggedIn = true;
+          this.userProfileSubject$.next(user);
+          this.store.dispatch(RootActions.loadUserSuccess({ userData: user }));
+        } else {
+          this.store.dispatch(
+            RootActions.loadUserFailure({ error: 'unable to login' })
+          );
+        }
+
+        // Clean up subscription
+        checkAuthSub.unsubscribe();
       }
-
-      // Clean up subscription
-      checkAuthSub.unsubscribe();
-    });
+    );
   }
-
-  login(redirectPath: string = '/') {
+  login(redirectPath: string = '/'): Observable<any> {
+    return of({});
+  }
+  login1(redirectPath: string = '/') {
     // A desired redirect path can be passed to login method
     // (e.g., from a route guard)
     // Ensure Auth0 client instance exists
@@ -98,7 +113,7 @@ export class AuthService {
       // Call method to log in
       client.loginWithRedirect({
         redirect_uri: this.environment.callback,
-        appState: { target: redirectPath }
+        appState: { target: redirectPath },
       });
     });
   }
@@ -111,17 +126,15 @@ export class AuthService {
     const authComplete$ = this.auth0Client$.pipe(
       // Have client, now call method to handle auth callback redirect
       concatMap(() => this.handleRedirectCallback$),
-      tap(cbRes => {
+      tap((cbRes) => {
         // Get and set target redirect route from callback results
-        targetRoute = cbRes.appState && cbRes.appState.target ? cbRes.appState.target : '/';
+        targetRoute =
+          cbRes.appState && cbRes.appState.target ? cbRes.appState.target : '/';
       }),
       concatMap(() => {
         // Redirect callback complete; create stream
         // returning user data and authentication status
-        return combineLatest(
-          this.getUser$(),
-          this.isAuthenticated$
-        );
+        return combineLatest(this.getUser$(), this.isAuthenticated$);
       })
     );
     // Subscribe to authentication completion observable
@@ -130,7 +143,7 @@ export class AuthService {
       // Update subjects and loggedIn property
       user.loggedIn = loggedIn;
       this.userProfileSubject$.next(user);
-      console.log("user",user);
+      console.log('user', user);
       this.store.dispatch(RootActions.loadUserSuccess({ userData: user }));
 
       // Redirect to target route after callback processing
@@ -144,7 +157,7 @@ export class AuthService {
       // Call method to log out
       client.logout({
         client_id: this.environment.authClient,
-        returnTo: this.environment.path
+        returnTo: this.environment.path,
       });
     });
   }

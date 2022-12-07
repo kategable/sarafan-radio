@@ -1,44 +1,24 @@
-import { switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
-
-import * as RootActions from './root.actions';
-import { map } from 'rxjs/operators';
-import { AuthService } from '../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { AuthService } from '../auth/services/auth.service';
+import * as RootActions from './root.actions';
 
 @Injectable()
 export class RootEffects {
-  // loginAction$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(RootActions.LoginAction),
-  //     fetch({
-  //       run: () => {
-  //         this.auth.login();
-  //       },
-  //       onError: (action, error) => {
-  //         console.error('Error', error);
-  //         return RootActions.loadUserFailure({ error });
-  //       }
-  //     })
-  //   )
-  // );
-
-  // logoutAction$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(RootActions.LogoutAction),
-  //     fetch({
-  //       run: () => {
-  //         this.auth.logout();
-  //       },
-  //       onError: (action, error) => {
-  //         console.error('Error', error);
-  //         return RootActions.genericFailure({ error });
-  //       }
-  //     })
-  //   )
-  // );
+  loginAction$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RootActions.LoginAction),
+      switchMap((action) => {
+        return this.auth.login(action.).pipe(
+          map((userData) => RootActions.loadUserSuccess(userData)),
+          catchError((error) => of(RootActions.loadUserFailure(error)))
+        );
+      })
+    )
+  );
 
   linkChangeAction$ = createEffect(
     () =>
@@ -59,3 +39,25 @@ export class RootEffects {
     this.auth.localAuthSetup();
   }
 }
+
+// logoutAction$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(RootActions.LogoutAction),
+//   map(()=>
+//       this.auth.logout() ;
+//     ),   { dispatch: false }),
+
+// logoutAction$ = createEffect(() =>
+//   this.actions$.pipe(
+//     ofType(RootActions.LogoutAction),
+//     fetch({
+//       run: () => {
+//         this.auth.logout();
+//       },
+//       onError: (action, error) => {
+//         console.error('Error', error);
+//         return RootActions.genericFailure({ error });
+//       }
+//     })
+//   )
+// );
