@@ -91,7 +91,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "angular-cli-ghpages": "^1.0.0-rc.2",
     "codelyzer": "6.0.2",
-    "cypress": "^4.1.0",
+    "cypress": "^4.12.1",
     "dotenv": "10.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.1.0",
